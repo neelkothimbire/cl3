@@ -1,3 +1,101 @@
+Java 
+
+*********************PalindromeChecker.java*******************
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface PalindromeChecker extends Remote {
+    boolean isPalindrome(String input) throws RemoteException;
+}
+
+*********************PalindromeCheckerImpl.java***********************
+
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
+
+public class PalindromeCheckerImpl extends UnicastRemoteObject implements PalindromeChecker {
+
+    protected PalindromeCheckerImpl() throws RemoteException {
+        super();
+    }
+
+    public boolean isPalindrome(String input) throws RemoteException {
+        input = input.toLowerCase();
+        String reversed = new StringBuilder(input).reverse().toString();
+        return input.equals(reversed);
+    }
+}
+***********************Server.java*************************************************
+import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+
+public class Server {
+    public static void main(String[] args) {
+        try {
+            LocateRegistry.createRegistry(2000); // Start RMI registry
+            PalindromeChecker checker = new PalindromeCheckerImpl();
+            Naming.rebind("rmi://localhost/PalindromeService", checker);
+            System.out.println("Server is running...");
+        } catch (Exception e) {
+            System.out.println("Server error: " + e);
+        }
+    }
+}
+
+
+******************** Client.java **************************************************
+
+import java.rmi.Naming;
+import java.util.Scanner;
+
+public class Client {
+    public static void main(String[] args) {
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter string: ");
+            String input = sc.nextLine();
+
+            PalindromeChecker checker = (PalindromeChecker) Naming.lookup("rmi://localhost/PalindromeService");
+
+            if (checker.isPalindrome(input)) {
+                System.out.println("Is a palindrome");
+            } else {
+                System.out.println("Not a palindrome");
+            }
+        } catch (Exception e) {
+            System.out.println("Client error: " + e);
+        }
+    }
+}
+
+
+************* TO RUN IN CMD *************************
+CMD 1
+
+javac *.java
+start rmiregistry
+java Server
+
+CMD 2 
+
+java Clinet 
+
+
+
+*********** If this error is shown **********************
+
+Server error: java.rmi.server.ExportException: Port already in use: 1099; nested exception is:
+        java.net.BindException: Address already in use: JVM_Bind
+
+
+In server code change 
+
+LocateRegistry.createRegistry(2000)
+Change inside the bracket any random number aand then run it 
+
+***************Python****************************************
+
+
 ********************* CLIENT *****************************************
 
 import Pyro4

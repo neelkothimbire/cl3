@@ -1,4 +1,4 @@
-*************** CONCATCLIENT **************************
+***************  ConcatClient.java (Filename) **************************
 import java.rmi.Naming;
 import java.util.Scanner;
 
@@ -28,7 +28,7 @@ public class ConcatClient {
 }
 
 
-********************CONCATIMPLEMENTATION ********************************
+******************** ConcatImplementation  (Filename) ********************************
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 
@@ -46,7 +46,7 @@ public class ConcatImplementation extends UnicastRemoteObject implements ConcatI
     }
 }
 
-*************************CONACTINTERFACE****************************************
+************************* ConcatInterface.java (filename)****************************************
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -55,7 +55,7 @@ public interface ConcatInterface extends Remote {
     String concatenate(String s1, String s2) throws RemoteException;
 }
 
-*************************CONCATSERVER******************************************
+************************* ConcatServer.java (filename)******************************************
 import java.rmi.Naming;
 
 public class ConcatServer {

@@ -1,6 +1,6 @@
 Java 
 
-*********************PalindromeChecker.java*******************
+*********************PalindromeChecker.java  (Filename) *******************
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -8,7 +8,7 @@ public interface PalindromeChecker extends Remote {
     boolean isPalindrome(String input) throws RemoteException;
 }
 
-*********************PalindromeCheckerImpl.java***********************
+*********************PalindromeCheckerImpl.java  (Filename) ***********************
 
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
@@ -25,7 +25,7 @@ public class PalindromeCheckerImpl extends UnicastRemoteObject implements Palind
         return input.equals(reversed);
     }
 }
-***********************Server.java*************************************************
+***********************Server.java (Filename) *************************************************
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
@@ -43,7 +43,7 @@ public class Server {
 }
 
 
-******************** Client.java **************************************************
+******************** Client.java  (Filename) **************************************************
 
 import java.rmi.Naming;
 import java.util.Scanner;

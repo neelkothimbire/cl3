@@ -21,3 +21,19 @@ map_reduce("sample.txt")
 
 ****************************Create a txt fime name sample.txt in same Folder***************************************
 Hello my name is Neel. i am in final year of engineering in AI and DS, It is nice to see you mam! Where have you been? 
+
+
+***************ALTERNATE*************************
+def map_reduce(file_name):
+    with open(file_name, "r") as file:
+        review = file.read()
+    
+    # mapper
+    sentences = [sent.strip() for sent in re.split(r"[.,!]", review) if sent.strip()]
+    mapped = {sent: i+1 for i, sent in enumerate(sentences)}
+    for doc, doc_id in mapped.items():
+        print(f"doc_ID[{doc_id}]: {doc}")
+    
+    # reducer
+    total_sents = len(mapped)
+    print(f"\ntotal number of sentences : {total_sents}")
